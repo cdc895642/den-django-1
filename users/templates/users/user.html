@@ -1,0 +1,12 @@
+{%extends 'main/base_generic.html'%}
+{%block main_section%}
+<div class="form-section">
+    <h2>Авторизация на сайте</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-outline-warning">Войти</button>
+    </form>
+
+</div>
+{%endblock main_section%}

@@ -1,0 +1,57 @@
+{%extends 'main/base_generic.html'%}
+{%block main_section1%}
+
+{%for post in top%}
+     <div class="media text-muted pt-3">
+      <img class=" mr-2 rounded" style="width:128px; height:128px;" src="{{post.img.url}}" >
+{%endfor%}
+
+<div class="container-fluid">
+
+    <div class="row">
+      <div class="col-sm-2">
+      {% block sidebar %}
+      <ul class="sidebar-nav">
+          <li><a href="{% url 'category_game' %}">Games</a></li>
+          <li><a href="{%url 'category_multi'%}">Multimedia</a></li>
+          <li><a href="" download="{% url 'down'%}">Productivity</a></li>
+          <li><a href="">Tools</a></li>
+          <li><a href="">Health</a></li>
+          <li><a href="">Lifestyle</a></li>
+      </ul>
+     {% endblock %}
+      </div>
+      <div class="col-sm-10 ">
+      {% block content %}{% endblock %}
+      </div>
+    </div>
+
+  </div>
+
+<div class="container ">
+{%for post in news%}
+     <div class="media text-muted pt-3">
+      <img class=" mr-2 rounded" style="width:128px; height:128px;" src="{{post.img.url}}">
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+
+      </p>
+    </div>
+    <a class="p-2 text-dark" href="{% url 'news-detail' post.id%}"><h2>{{post.title}}</h2></a>
+    <h6>Скачано:{{post.download}}</h6>
+{%endfor%}
+</div>
+<main class="container" >
+ <div class="row">
+        <div class="col-md-8">
+            {%if messages%}
+                {% for mess in messages%}
+                <div class="alert alert-success">
+                    {{mess}}
+                </div>
+                {% endfor %}
+            {%endif%}
+            {% block main_section%}
+            {%endblock%}
+        </div>
+    </div>
+{%endblock main_section1%}
