@@ -9,7 +9,7 @@
 
       </p>
     </div>
-    <a class="p-2 text-dark" href=""><h2>{{post.title}}</h2></a>
+    <a class="p-2 text-dark" href="{% url 'news-detail' post.id%}"><h2>{{post.title}}</h2></a>
     <h6>Скачано:{{post.download}}</h6>
 
 </div>

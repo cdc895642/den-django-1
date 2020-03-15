@@ -21,8 +21,7 @@ class Post(models.Model):
               ('Multimedia','multimedia')}
     title = models.CharField(max_length=120)
     text = models.TextField(blank=True,null=True)
-    category=models.CharField(max_length=20,
-    choices=CATEGORY,blank=True,null=True)
+    category=models.CharField(max_length=20,choices=CATEGORY,blank=True,null=True)
     img = models.ImageField( upload_to='users_img/%Y/%m/%d',blank=True,null=True,default='default.png')
     file=models.FileField(upload_to='users_files/',blank=True,null=True)
     download=models.PositiveIntegerField(default=0)

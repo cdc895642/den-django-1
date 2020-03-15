@@ -80,8 +80,8 @@ def down(request,pk):
     Count.save()
     cur.close()
     con.close()
-    print('sdsdd')
-    return redirect(column)
+
+    return redirect('users_files/default_DaSqWvJ.zip')
 
 
 

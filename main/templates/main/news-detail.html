@@ -19,6 +19,6 @@
     <p>{{object.text}}</p>
 
 </div>
-<a href="{% url 'down'%}"  download>Download</a>
+<a href="{{post.file.url}}" download>Download</a>
 
 {%endblock main_section1%}
