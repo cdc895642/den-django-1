@@ -3,7 +3,7 @@ from .forms import UserOurRegistration
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-def register(request):
+def register(request):      #Отвечает за регистрацию
     if request.method =='POST':
         form=UserOurRegistration(request.POST)
         if form.is_valid():
@@ -17,5 +17,5 @@ def register(request):
 
 
 @login_required()
-def profile(request):
+def profile(request):       #Отвечает за вывод профиля
     return render(request,'users/profile.html')

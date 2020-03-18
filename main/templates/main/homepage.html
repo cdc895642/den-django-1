@@ -2,16 +2,16 @@
 {%block main_section1%}
 
 {%for post in top%}
-     <div class="media text-muted pt-3">
-      <img class=" mr-2 rounded" style="width:128px; height:128px;" src="{{post.img.url}}" >
+     <div >
+      <img class=" mr-2 rounded" style="width:128px; height:128px;" src="{{post.img.url}}" align="left" >
+     </div>
 {%endfor%}
 
-<div class="container-fluid">
+<div class="container-fluid" >
 
-    <div class="row">
-      <div class="col-sm-2">
-      {% block sidebar %}
-      <ul class="sidebar-nav">
+    <div class="row"  >
+      <div class="col-sm-2 "  >
+      <ul class="line" align="left">
           <li><a href="{% url 'category_game' %}">Games</a></li>
           <li><a href="{%url 'category_multi'%}">Multimedia</a></li>
           <li><a href="">Productivity</a></li>
@@ -19,7 +19,6 @@
           <li><a href="">Health</a></li>
           <li><a href="">Lifestyle</a></li>
       </ul>
-     {% endblock %}
       </div>
       <div class="col-sm-10 ">
       {% block content %}{% endblock %}
@@ -28,16 +27,13 @@
 
   </div>
 
-<div class="container ">
+<div align="middle">
 {%for post in news%}
-     <div class="media text-muted pt-3">
-      <img class=" mr-2 rounded" style="width:128px; height:128px;" src="{{post.img.url}}">
-      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-
-      </p>
-    </div>
-    <a class="p-2 text-dark" href="{% url 'news-detail' post.id%}"><h2>{{post.title}}</h2></a>
-    <h6>Скачано:{{post.download}}</h6>
+     <div  class="post" >
+      <img class="" style="width:89px; height:89px;" src="{{post.img.url}}">
+         <a class="p-2 text-dark" href="{% url 'news-detail' post.id%}"><h4>{{post.title}}</h4></a>
+    <span class="text-muted">Скачано:{{post.download}}</span>
+        </div>
 {%endfor%}
 </div>
 <main class="container" >
