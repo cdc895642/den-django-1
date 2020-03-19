@@ -14,7 +14,9 @@ font-color:#bfbfbf
 .line{
   transform: translate(-500px,200px);
   border-right: 2px solid #ccc ; /* Параметры линии */
-  padding-left:10px;
+  padding-right:83px;
+  padding-left:1px;
+
 
 
 
