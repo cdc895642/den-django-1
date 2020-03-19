@@ -8,38 +8,40 @@ from django import forms
 from django.shortcuts import render, redirect
 import sqlite3
 
-
-def HomePage(request):      #Отвечает за вывод главной страницы
-    News=Post.objects.all()     #Собирает все статьи из таблички и выводит их
-    Top=Post.objects.order_by('-download')[:5]      #Собирает пять статей и сортирует их по количеству скачиваний
+#Depends on view homepage
+def HomePage(request):
+    # Collecting all apps from table Post
+    News=Post.objects.all()
+    # Collecting 5 apps and sort they by number of downloaded files
+    Top=Post.objects.order_by('-download')[:5]
 
     data={'news':News,
           'top':Top,
           'title':'Главная страница'}
     return render(request,'main/homepage.html',data)
 
-
-class NewsDetailView(DetailView):       #Детальный просмотор каждой статьи
+#Detail view of concrete app
+class NewsDetailView(DetailView):
     model=Post
     template_name = 'main/news-detail.html'
     context_object_name = 'post'
-
-    def get_context_data(self, **kwards):       #Отвечаает за вывод названий статьи в тайтле
+    #Depends on view name of concrete app in title
+    def get_context_data(self, **kwards):
         ctx=super(NewsDetailView,self).get_context_data(**kwards)
         ctx['title']=Post.objects.filter(pk=self.kwargs['pk']).first()
         return ctx
 
-
-class CreateNewsView(LoginRequiredMixin,CreateView):        #Отвечает за созадний новой статьи
+#Depends on creating new app
+class CreateNewsView(LoginRequiredMixin,CreateView):
     login_url = '/user/'
     redirect_field_name = 'redirect_to'
     model = Post
     fields = ['title','text','category','img','file']
 
 """
-Ниже приведенные функции c названием "category_..." отвечают за вывод статей по категориям.
-Переменные Category собирают все статьи 
-и фильтрует их по названию указанной категории"category__exact".
+Undermentioned function with name "category_..." depends on view apps with concrete category.
+Variable "Category" colect all apss 
+and sort they by concrete category (category__exact).
 """
 def category_game(request):
     Category=Post.objects.filter(category__exact='Games')
@@ -50,12 +52,16 @@ def category_multi(request):
     data={'example':Category1}
     return render(request,'main/category.html',data)
 
-
-def down(request,pk):       #Отвечает за счетчик скачиваний и скачивание файла
-    price = Post.objects.get(pk=pk)     #Собирает все статьи и каждой дает свой pk"primary key"
-    price.download += 1     #Добавляет +1 к счетчику
-    price.save()        #Сохраняет измениния
-    return redirect(price.file.url)     #Возравщает ссылку на файл
+#Depends on downloading files and count amount of downloading
+def down(request,pk):
+    #Collect all apps and every gives their personal pk"primary key"
+    price = Post.objects.get(pk=pk)
+    # Adds 1 to counter
+    price.download += 1
+    #Saves changes
+    price.save()
+    # Redirect us to personal path of path
+    return redirect(price.file.url)
 
 
 

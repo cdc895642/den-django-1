@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Post
 
 """
-Отвечает за вывод таблички в админ панеле.
+Depends on view table in admin panel.
 """
 admin.site.register(Post)
 

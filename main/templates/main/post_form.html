@@ -1,12 +1,13 @@
 {%extends 'main/base_generic.html'%}
+{%load crispy_forms_tags%}
 {%block main_section%}
 <div class="form-section">
-    <h2>Новая статья</h2>
+    <h2>Новая программа</h2>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit" class="btn btn-outline-warning">Добавить статью</button>
+        {{form|crispy}}
+        <button type="submit" class="btn btn-outline-warning">Добавить программу</button>
     </form>
 
 </div>

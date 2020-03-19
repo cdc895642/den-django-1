@@ -40,4 +40,13 @@ color: #fff; /* цвет текста */
   padding: .7em 1.5em; /* отступ от текста */
   outline: none; /* убирать контур в Mozilla */
 }
-
+.form-section{
+background:#fff;
+padding:20px;
+border:1px solid silver;
+box-sizing:border-box;
+width:100%;
+-webkit-box-shadow: 0 2px 3px 0 rgba(74,74,74,.21);
+-moz-boz-shadow: 0 2px 3px 0 rgba(74,74,74,.21);
+box-shadow: 0 2px 3px 0 rgba(74,74,74,.21);;
+}

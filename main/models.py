@@ -2,28 +2,32 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 
-
-class Post(models.Model):       #Табличка отвечает за статьи
-    CATEGORY={('Games','games'),        #Все категории которые можно выбрать
+#Table depends on all apps
+class Post(models.Model):
+    #All cetegories which we can choose
+    CATEGORY={('Games','games'),
               ('Multimedia','multimedia')}
-    title = models.CharField(max_length=120)        #Название
-    text = models.TextField(blank=True,null=True)       #Текст
-    category=models.CharField(max_length=20,choices=CATEGORY,blank=True,null=True)      #Категории
-    img = models.ImageField( upload_to='users_img/%Y/%m/%d',blank=True,null=True,default='default.png')     #Картинка
-    file=models.FileField(upload_to='users_files/',blank=True,null=True)        #Файл
-    download=models.PositiveIntegerField(default=0)     #Счетчик
-    is_active = models.BooleanField(default=True, verbose_name='Модерация')     #Модерация
+    title = models.CharField(max_length=120)
+    text = models.TextField(blank=True,null=True)
+    category=models.CharField(max_length=20,choices=CATEGORY,blank=True,null=True)
+    img = models.ImageField( upload_to='users_img/',blank=True,null=True,default='default.png')
+    file=models.FileField(upload_to='users_files/',blank=True,null=True)
+    #Counter
+    download=models.PositiveIntegerField(default=0)
+    #TODO связано с счетчиком и скачиванием файла.Добавил по примеру,не понимаю как роботает.
+    is_active = models.BooleanField(default=True, verbose_name='Модерация')
 
     """
-    Сама табличка не передает нам название статьи.
-    Она передает название объекта(Например,'Post_object 5').
-    Следуйщая функция решает эту проблему,
-    забираю из таблчики строковое значения поля "title".
+    Table dont give us name of app(title).
+    It returns only name of object(For example,'Post_object 5').
+    Next function deal with this problem,
+    taking from table string "title".
     """
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):     #Отвечает за то,что бы после создания статьи,нас перекидывало на саму статью.
+    #Depends on ,when we add new app,site redirects us to detail view of this app.
+    def get_absolute_url(self):
         return reverse('news-detail', kwargs={'pk': self.pk})
 
 
