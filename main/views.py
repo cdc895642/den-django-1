@@ -7,6 +7,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 from django.shortcuts import render, redirect
 import sqlite3
+from zipfile import ZipFile
+
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+import hashlib
+
+
 
 #Depends on view homepage
 def HomePage(request):
@@ -36,11 +43,33 @@ class CreateNewsView(LoginRequiredMixin,CreateView):
     login_url = '/user/'
     redirect_field_name = 'redirect_to'
     model = Post
-    fields = ['title','text','category','img','file']
+    fields = ['title','text','category','file']
+
+    def get_context_data(self, **kwards):
+        ctx = super(CreateNewsView, self).get_context_data(**kwards)
+        ctx['title'] = 'Создание новой программы'
+        return ctx
+
+    def form_valid(self,form):
+        instance=form.save()
+        #P=Post.objects.get(pk=instance.id)
+        zipFile=ZipFile(instance.file, 'r')
+        Big = zipFile.extract('big.png')
+        Small = zipFile.extract('small.png')
+        zipFile.close()
+
+        #Adding photos in database
+        instance.BigImg=Big
+        instance.SmallImg=Small
+
+        instance.save()
+
+        return super(CreateNewsView, self).form_valid(form)
+
 
 """
 Undermentioned function with name "category_..." depends on view apps with concrete category.
-Variable "Category" colect all apss 
+Variable "Category" collect all apps 
 and sort they by concrete category (category__exact).
 """
 def category_game(request):
@@ -62,6 +91,9 @@ def down(request,pk):
     price.save()
     # Redirect us to personal path of path
     return redirect(price.file.url)
+
+
+
 
 
 

@@ -3,7 +3,7 @@
 
 {%for post in top%}
      <div >
-      <img class=" mr-2 rounded" style="width:128px; height:128px;" src="{{post.img.url}}" align="left" >
+      <img class=" mr-2 rounded" style="width:128px; height:128px;" src="{{post.BigImg.url  }}" align="left" >
      </div>
 {%endfor%}
 
@@ -30,7 +30,7 @@
 <div align="middle">
 {%for post in news%}
      <div  class="post" >
-      <img class="" style="width:89px; height:89px;" src="{{post.img.url}}">
+      <img class="" style="width:89px; height:89px;" src="{{post.SmallImg.url}}">
          <a class="p-2 text-dark" href="{% url 'news-detail' post.id%}"><h4>{{post.title}}</h4></a>
     <span class="text-muted">Скачано:{{post.download}}</span>
         </div>
